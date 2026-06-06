@@ -1,5 +1,5 @@
 // ============================================================
-// VELAS KUKUMITA — app.js
+// ECOS ACUARIO — app.js
 // JavaScript extraído y organizado desde index.html.
 // Incluye:
 //   - cargarCatalogo()  : fetch dinámico desde Google Sheets CSV
@@ -476,7 +476,7 @@ function cargarDesdeGoogleSheets() {
             document.dispatchEvent(new CustomEvent('catalogoCargado'));
 
             // Log de diagnostico: precios y tipos de cada producto (visible en DevTools > Consola)
-            console.group('[Equus] Catalogo cargado — ' + listaProductos.length + ' productos');
+            console.group('[Ecos Acuario] Catálogo cargado — ' + listaProductos.length + ' productos');
             listaProductos.forEach(function(p) {
                 console.log(p.nombre + ' | precio=$' + p.precioNormal + ' | precioBazar=$' + p.precioBazar + ' | tipos=[' + (p.tipos || [p.tipo]).join('|') + ']');
             });
@@ -966,13 +966,13 @@ if (document.readyState === 'loading') {
                     imgEl.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
                     imgEl.onerror = function() {
                         wrap.innerHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f9f5f2;gap:4px;">' +
-                            '<span style="font-size:22px;">🕯️</span>' +
+                            '<span style="font-size:22px;">🐠</span>' +
                             '<span style="font-size:9px;color:#a89080;text-align:center;padding:0 6px;">' + nombreRel + '</span></div>';
                     };
                     wrap.appendChild(imgEl);
                 } else {
                     wrap.innerHTML = '<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f9f5f2;gap:4px;">' +
-                        '<span style="font-size:22px;">🕯️</span>' +
+                        '<span style="font-size:22px;">🐠</span>' +
                         '<span style="font-size:9px;color:#a89080;text-align:center;padding:0 6px;">' + nombreRel + '</span></div>';
                 }
 
@@ -1363,10 +1363,10 @@ if (document.readyState === 'loading') {
     // ===== MODO OSCURO =====
     function toggleModoOscuro() {
         document.body.classList.toggle('modo-oscuro');
-        localStorage.setItem('velas-modo-oscuro', document.body.classList.contains('modo-oscuro') ? '1' : '0');
+        localStorage.setItem('acuario-modo-oscuro', document.body.classList.contains('modo-oscuro') ? '1' : '0');
     }
     // Restaurar preferencia guardada
-    if (localStorage.getItem('velas-modo-oscuro') === '1') {
+    if (localStorage.getItem('acuario-modo-oscuro') === '1') {
         document.body.classList.add('modo-oscuro');
     }
 
@@ -1780,7 +1780,7 @@ function toggleSubpanelDrawer(id) {
 
 // ═══ SESIÓN SIMULADA (conectar con Firebase cuando esté listo) ═══
 function estaEnSesion() {
-    return localStorage.getItem('velas-sesion-activa') === '1';
+    return localStorage.getItem('acuario-sesion-activa') === '1';
 }
 
 function actualizarEstadoSesionDrawer() {
@@ -1788,27 +1788,27 @@ function actualizarEstadoSesionDrawer() {
     document.getElementById('drawerZonaSesion').classList.toggle('visible', !conSesion);
     document.getElementById('drawerPerfilBloque').style.display = conSesion ? 'flex' : 'none';
     if (conSesion) {
-        const foto = localStorage.getItem('velas-foto-perfil');
+        const foto = localStorage.getItem('acuario-foto-perfil');
         if (foto) document.getElementById('drawerAvatar').src = foto;
-        const nombre = localStorage.getItem('velas-nombre-usuario') || 'Mi cuenta';
+        const nombre = localStorage.getItem('acuario-nombre-usuario') || 'Mi cuenta';
         document.getElementById('drawerNombreUsuario').textContent = nombre;
     }
 }
 
 function cerrarSesion() {
-    localStorage.removeItem('velas-sesion-activa');
-    localStorage.removeItem('velas-foto-perfil');
-    localStorage.removeItem('velas-nombre-usuario');
+    localStorage.removeItem('acuario-sesion-activa');
+    localStorage.removeItem('acuario-foto-perfil');
+    localStorage.removeItem('acuario-nombre-usuario');
     cerrarPantallaPerfil();
     actualizarEstadoSesionDrawer();
 }
 
 // ═══ PANTALLA PERFIL COMPLETA ═══
 function abrirPantallaPerfil() {
-    const foto = localStorage.getItem('velas-foto-perfil');
+    const foto = localStorage.getItem('acuario-foto-perfil');
     if (foto) document.getElementById('pantallaAvatar').src = foto;
     document.getElementById('pantallaUsuarioNombre').textContent =
-        localStorage.getItem('velas-nombre-usuario') || 'Mi cuenta';
+        localStorage.getItem('acuario-nombre-usuario') || 'Mi cuenta';
     document.getElementById('pantallaPerfil').classList.add('activo');
     document.body.style.overflow = 'hidden';
     _modalActivo = 'perfil';
@@ -2039,7 +2039,7 @@ function aplicarFotoPerfil(event) {
         const avatarPantalla = document.getElementById('pantallaAvatar');
         if (avatarDrawer) avatarDrawer.src = src;
         if (avatarPantalla) avatarPantalla.src = src;
-        localStorage.setItem('velas-foto-perfil', src); // fallback local
+        localStorage.setItem('acuario-foto-perfil', src); // fallback local
     };
     reader.readAsDataURL(archivo);
 
@@ -2052,7 +2052,7 @@ function aplicarFotoPerfil(event) {
             return ref.getDownloadURL();
         }).then(function(url) {
             return user.updateProfile({ photoURL: url }).then(function() {
-                localStorage.setItem('velas-foto-perfil', url);
+                localStorage.setItem('acuario-foto-perfil', url);
                 const avatarDrawer = document.getElementById('drawerAvatar');
                 const avatarPantalla = document.getElementById('pantallaAvatar');
                 if (avatarDrawer) avatarDrawer.src = url;
@@ -2254,17 +2254,17 @@ function cerrarSesion() {
 auth.onAuthStateChanged(user => {
     if (user) {
         // Guardar datos en localStorage como cache visual
-        localStorage.setItem('velas-sesion-activa', '1');
-        if (user.photoURL) localStorage.setItem('velas-foto-perfil', user.photoURL);
-        localStorage.setItem('velas-nombre-usuario', user.displayName || 'Mi cuenta');
-        localStorage.setItem('velas-email-usuario', user.email || '');
-        localStorage.setItem('velas-proveedor', user.providerData[0]?.providerId || '');
+        localStorage.setItem('acuario-sesion-activa', '1');
+        if (user.photoURL) localStorage.setItem('acuario-foto-perfil', user.photoURL);
+        localStorage.setItem('acuario-nombre-usuario', user.displayName || 'Mi cuenta');
+        localStorage.setItem('acuario-email-usuario', user.email || '');
+        localStorage.setItem('acuario-proveedor', user.providerData[0]?.providerId || '');
     } else {
-        localStorage.removeItem('velas-sesion-activa');
-        localStorage.removeItem('velas-foto-perfil');
-        localStorage.removeItem('velas-nombre-usuario');
-        localStorage.removeItem('velas-email-usuario');
-        localStorage.removeItem('velas-proveedor');
+        localStorage.removeItem('acuario-sesion-activa');
+        localStorage.removeItem('acuario-foto-perfil');
+        localStorage.removeItem('acuario-nombre-usuario');
+        localStorage.removeItem('acuario-email-usuario');
+        localStorage.removeItem('acuario-proveedor');
     }
     actualizarEstadoSesionDrawer();
     actualizarPantallaPerfil();
@@ -2325,7 +2325,7 @@ async function guardarNuevoNombre() {
     if (!nuevoNombre) { mostrarToast('Escribe un nombre válido'); return; }
     try {
         await user.updateProfile({ displayName: nuevoNombre });
-        localStorage.setItem('velas-nombre-usuario', nuevoNombre);
+        localStorage.setItem('acuario-nombre-usuario', nuevoNombre);
         document.getElementById('pantallaUsuarioNombre').textContent = nuevoNombre;
         document.getElementById('drawerNombreUsuario').textContent = nuevoNombre;
         const subNombre = document.getElementById('subNombreActual');
@@ -2371,7 +2371,7 @@ function aplicarFotoPerfil(event) {
         const avatarPantalla = document.getElementById('pantallaAvatar');
         if (avatarDrawer) avatarDrawer.src = src;
         if (avatarPantalla) avatarPantalla.src = src;
-        localStorage.setItem('velas-foto-perfil', src);
+        localStorage.setItem('acuario-foto-perfil', src);
     };
     reader.readAsDataURL(archivo);
 
@@ -2384,7 +2384,7 @@ function aplicarFotoPerfil(event) {
             return ref.getDownloadURL();
         }).then(function(url) {
             return user.updateProfile({ photoURL: url }).then(function() {
-                localStorage.setItem('velas-foto-perfil', url);
+                localStorage.setItem('acuario-foto-perfil', url);
                 const avatarDrawer = document.getElementById('drawerAvatar');
                 const avatarPantalla = document.getElementById('pantallaAvatar');
                 if (avatarDrawer) avatarDrawer.src = url;
@@ -2404,8 +2404,8 @@ function aplicarFotoPerfil(event) {
 function abrirPantallaPerfil() {
     actualizarPantallaPerfil();
     // Fallback si Firebase aún no tiene usuario pero hay sesión guardada
-    const foto = (auth.currentUser?.photoURL) || localStorage.getItem('velas-foto-perfil');
-    const nombre = (auth.currentUser?.displayName) || localStorage.getItem('velas-nombre-usuario') || 'Mi cuenta';
+    const foto = (auth.currentUser?.photoURL) || localStorage.getItem('acuario-foto-perfil');
+    const nombre = (auth.currentUser?.displayName) || localStorage.getItem('acuario-nombre-usuario') || 'Mi cuenta';
     const avatarEl = document.getElementById('pantallaAvatar');
     const nombreEl = document.getElementById('pantallaUsuarioNombre');
     if (avatarEl && foto) avatarEl.src = foto;
@@ -2418,7 +2418,7 @@ function abrirPantallaPerfil() {
 
 
 
-// ═══ ETIQUETA "VELA" EN TODAS LAS CARDS ═══
+// ═══ ETIQUETAS DE PRODUCTO EN TODAS LAS CARDS ═══
 document.querySelectorAll('.card-dinamica').forEach(function(card) {
     card.setAttribute('data-tags', 'producto');
     const tagDivs = Array.from(card.querySelectorAll('div[style*="display: flex"][style*="gap: 5px"]')).filter(function(div) {
@@ -2428,16 +2428,16 @@ document.querySelectorAll('.card-dinamica').forEach(function(card) {
     tagDivs.forEach(function(div) { div.style.display = 'none'; });
 });
 
-// ═══ BÚSQUEDA EN DRAWER: si busca "producto" o "velas" → modo arreglos página 1 ═══
+// ═══ BÚSQUEDA EN DRAWER: si busca "producto" o "peces" → modo productos página 1 ═══
 const _origEjecutarBusqueda = ejecutarBusquedaDrawer;
 ejecutarBusquedaDrawer = function() {
     var query = (document.getElementById('drawerInputBusqueda').value || '').trim().toLowerCase();
-    if (query === 'producto' || query === 'velas') {
+    if (query === 'producto' || query === 'peces') {
         cerrarDrawer();
         if (typeof cambiarModoVelas === 'function') cambiarModoVelas('arreglos');
         document.querySelectorAll('.card-dinamica').forEach(function(c) { c.classList.remove('oculto'); });
         if (typeof window.actualizarPaginacion === 'function') window.actualizarPaginacion();
-        if (typeof mostrarToast === 'function') mostrarToast('🕯️ Mostrando todos los productos');
+        if (typeof mostrarToast === 'function') mostrarToast('🐠 Mostrando todos los productos');
         return;
     }
     _origEjecutarBusqueda();
@@ -2481,7 +2481,7 @@ function activarPill(cual) {
 
 // ===== PREFERENCIA DE PÁGINA DE INICIO =====
 function setPaginaInicio(cual) {
-    localStorage.setItem('kukumita-inicio', cual);
+    localStorage.setItem('acuario-inicio', cual);
     _actualizarBotonesInicio(cual);
     activarPill(cual);
 }
@@ -2509,7 +2509,7 @@ function _actualizarBotonesInicio(cual) {
 
 // Aplicar preferencia guardada (o productos por defecto)
 (function() {
-    var pref = localStorage.getItem('kukumita-inicio') || 'productos';
+    var pref = localStorage.getItem('acuario-inicio') || 'productos';
     _ready(function() {
         activarPill(pref);
         _actualizarBotonesInicio(pref);
@@ -2518,10 +2518,10 @@ function _actualizarBotonesInicio(cual) {
 
 // ===== FAVORITOS =====
 // Los IDs se guardan como enteros. listaProductos es la fuente de verdad.
-var favoritos = (JSON.parse(localStorage.getItem('kukumita-favoritos') || '[]')).map(Number);
+var favoritos = (JSON.parse(localStorage.getItem('acuario-favoritos') || '[]')).map(Number);
 
 function _guardarFavoritos() {
-    localStorage.setItem('kukumita-favoritos', JSON.stringify(favoritos));
+    localStorage.setItem('acuario-favoritos', JSON.stringify(favoritos));
 }
 
 function esFavorito(card) {
@@ -3952,9 +3952,9 @@ function _cargarFavoritosFirestore(uid) {
             var d = doc.data();
             if (d.favoritos && Array.isArray(d.favoritos)) {
                 var localFavs = [];
-                try { localFavs = JSON.parse(localStorage.getItem('velas-favoritos') || '[]'); } catch(e) {}
+                try { localFavs = JSON.parse(localStorage.getItem('acuario-favoritos') || '[]'); } catch(e) {}
                 var merged = Array.from(new Set(localFavs.concat(d.favoritos)));
-                localStorage.setItem('velas-favoritos', JSON.stringify(merged));
+                localStorage.setItem('acuario-favoritos', JSON.stringify(merged));
                 if (typeof syncBotonesLike === 'function') syncBotonesLike();
             }
         }
@@ -4041,3 +4041,6 @@ function _cargarFavoritosFirestore(uid) {
         }, 800);
     };
 })();
+
+// ── Alias de compatibilidad (nombre semántico para el proyecto acuario)
+var cambiarCategoriaAcuario = cambiarModoVelas;
