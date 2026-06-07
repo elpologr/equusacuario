@@ -1428,7 +1428,7 @@
         .btn-modo-velas {
             background-color: #f0eae4;
             border: 2px solid #d4c5b8;
-            color: #5c4d43;
+            color: #111;
             font-size: 15px;
             font-weight: 600;
             border-radius: 20px;
@@ -1448,7 +1448,7 @@
         }
         .btn-modo-velas:hover:not(.activo) {
             border-color: #8c7565;
-            color: #4a3b32;
+            color: #000;
         }
 
         /* ===== BARRA DE BÚSQUEDA UNIFICADA ===== */
@@ -3323,3 +3323,17 @@ body.modo-oscuro .zona-titulo-pagina p,
 body.modo-oscuro .zona-titulo-pagina span {
     color: #a0908a !important;
 }
+
+/* ════════════════════════════════════════════════════
+   MODO CLARO — título y zona perfil: texto negro explícito
+   ════════════════════════════════════════════════════ */
+#tituloVelasKukumita {
+    color: #111 !important;
+}
+.zona-titulo-pagina h1,
+.zona-titulo-pagina h2 {
+    color: #111 !important;
+}
+body.modo-oscuro #tituloVelasKukumita { color: #f0e8e0 !important; }
+body.modo-oscuro .zona-titulo-pagina h1,
+body.modo-oscuro .zona-titulo-pagina h2 { color: #e0d5cc !important; }
