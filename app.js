@@ -1465,8 +1465,13 @@ if (document.readyState === 'loading') {
         const variantes = {
             'producto':      ['producto','productos'],
             'arreglo':       ['arreglo','arreglos'],
-            'decoracion':    ['decoracion','decoraciones','aditamento','aditamentos'],
-            'etiqueta':      ['etiqueta','etiquetas']
+            'decoracion':    ['decoracion','decoraciones','aditamento','aditamentos','filtro','filtros'],
+            'etiqueta':      ['etiqueta','etiquetas'],
+            'pez':           ['pez','peces'],
+            'tortuga':       ['tortuga','tortugas'],
+            'pesera':        ['pesera','peseras','pecera','peceras'],
+            'filtro':        ['filtro','filtros'],
+            'producto_acc':  ['producto','productos']
         };
         return buscar.some(function(b) {
             const lista = variantes[b] || [b];
@@ -1497,9 +1502,13 @@ if (document.readyState === 'loading') {
             const okEvento = eventoActivo === 'todos' || eventoCard.split(' ').includes(eventoActivo);
 
             if (panel === 'decoraciones') {
-                card.classList.toggle('oculto', !(tieneTipo(card, 'decoracion') && okNombre));
+                // Accesorios / Filtros y otros productos → etiqueta principal: filtro o producto
+                const esFiltroOProducto = tieneTipo(card, 'filtro') || tieneTipo(card, 'producto_acc');
+                card.classList.toggle('oculto', !(esFiltroOProducto && okNombre));
             } else if (panel === 'etiquetas') {
-                card.classList.toggle('oculto', !(tieneTipo(card, 'etiqueta') && okNombre && okEvento));
+                // Servicios de Pecera → etiqueta principal: pesera/pecera
+                const esPesera = tieneTipo(card, 'pesera');
+                card.classList.toggle('oculto', !(esPesera && okNombre && okEvento));
             } else if (panel === 'arreglos') {
                 // Respetar también el filtro de precio activo en arreglos
                 let okPrecio = true;
@@ -1509,7 +1518,7 @@ if (document.readyState === 'loading') {
                         : String(parseInt(card.getAttribute('data-precio') || '0', 10));
                     okPrecio = pAttr === precioArreglosActivo;
                 }
-                card.classList.toggle('oculto', !(tieneTipo(card, 'arreglo') && okNombre && okForma && okEvento && okPrecio));
+                card.classList.toggle('oculto', !(( tieneTipo(card, 'pez') || tieneTipo(card, 'tortuga') ) && okNombre && okForma && okEvento && okPrecio));
             } else {
                 // panel === 'todos' (Productos): muestra solo los que tienen tipo 'producto'
                 card.classList.toggle('oculto', !(tieneTipo(card, 'producto') && okNombre && okForma && okEvento));
@@ -1589,8 +1598,8 @@ if (document.readyState === 'loading') {
         document.querySelectorAll('.card-dinamica').forEach(card => {
             let visible = true;
 
-            // Solo mostrar tarjetas que tengan tipo arreglo
-            if (!tieneTipo(card, 'arreglo')) {
+            // Solo mostrar tarjetas que tengan tipo pez o tortuga
+            if (!tieneTipo(card, 'pez') && !tieneTipo(card, 'tortuga')) {
                 card.classList.add('oculto');
                 return;
             }
