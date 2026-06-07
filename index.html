@@ -88,7 +88,7 @@
 
         <!-- Cabecera -->
         <div class="drawer-header">
-            <span class="drawer-header-titulo">🐠 Acuario Equus Morelia</span>
+            <span class="drawer-header-titulo">🐠 Equus Acuario Morelia</span>
             <button class="btn-cerrar-drawer" onclick="cerrarDrawer()">✕</button>
         </div>
 
@@ -367,7 +367,7 @@
 
     <!-- ===== BARRA DE PÍLDORAS: BIOGRAFÍA / OFERTAS / MÁS VENDIDOS ===== -->
     <div class="pill-nav-barra" id="pillNavBarra">
-        <button class="pill-btn" id="pillBiografia" onclick="activarPill('biografia')">🐠 Acerca de Nosotros</button>
+        <button class="pill-btn" id="pillBiografia" onclick="activarPill('biografia')">🐠 Acerca de<br>Nosotros</button>
         <button class="pill-btn" id="pillProductos" onclick="activarPill('productos')">🐟 Catálogo</button>
         <button class="pill-btn" id="pillOfertas" onclick="activarPill('ofertas')">🏷️ Ofertas</button>
 
@@ -548,250 +548,9 @@
                 <div id="gridVideosRedes" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:8px;"></div>
             </div>
 
-            <!-- ══════════════════════════════════════════════════ -->
-            <!-- ZONA INTERACTIVA — ancla para navegación          -->
-            <!-- ══════════════════════════════════════════════════ -->
-            <div id="zona-interactiva" style="scroll-margin-top:80px;">
-                <div style="width:60px; height:1.5px; background:linear-gradient(90deg,transparent,#c9a98a,transparent); margin:36px auto 28px; border-radius:2px;"></div>
+            <div id="zona-interactiva" style="display:none;"></div>
 
-                <h2 style="text-align:center; font-size:2.6rem; font-weight:800; color:#362a22; letter-spacing:2px; margin:0 0 14px 0; font-family:'Playfair Display', Georgia, serif; font-style:italic; line-height:1.2;">Zona Interactiva</h2>
-
-                <!-- Tarjeta de bienvenida -->
-                <div style="background:linear-gradient(135deg,#fdf3e7,#fae8d0); border:2px solid #e8c89a; border-radius:18px; padding:26px 24px 22px; margin-bottom:0; position:relative; overflow:hidden;">
-                    <!-- Brillo decorativo -->
-                    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,0.35),transparent);pointer-events:none;"></div>
-
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                        <span style="font-size:1.6rem;">🎉</span>
-                        <p style="color:#5c4d43; font-size:0.93rem; font-weight:700; margin:0; line-height:1.5;">Bienvenido a la zona interactiva</p>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:20px;">
-                        Felicidades por explorar nuestra página. Como recompensa, te ofrecemos un <strong>cupón del 15% de descuento</strong> en cualquier producto o servicio de tu elección. Da clic en el siguiente botón para guardarlo y úsalo en tu próxima compra.
-                    </p>
-
-                    <!-- Estado: listo para reclamar -->
-                    <div id="zonaCupon15Estado" style="text-align:center;">
-                        <button id="btnReclamarCupon15"
-                            onclick="reclamarCuponZonaInteractiva()"
-                            style="display:inline-flex; align-items:center; gap:10px; background:linear-gradient(135deg,#f5a623,#e8921a); color:white; border:none; border-radius:999px; padding:14px 32px; font-size:1rem; font-weight:800; font-family:inherit; box-shadow:0 4px 16px rgba(232,146,26,0.4); cursor:pointer; transition:all 0.25s; letter-spacing:0.3px;">
-                            🎟️ Reclamar cupón del 15%
-                        </button>
-                        <p style="font-size:0.75rem; color:#9a8878; margin-top:10px; letter-spacing:0.3px;">El cupón se guarda en tu carrito y se aplica automáticamente.</p>
-                    </div>
-                </div>
-
-                <!-- ══════════════════════════ -->
-                <!-- RECUADRO: CONOCE AL CREADOR -->
-                <!-- ══════════════════════════ -->
-                <div style="background:linear-gradient(135deg,#fdf3e7,#fae8d0); border:2px solid #e8c89a; border-radius:18px; padding:26px 24px 22px; margin-top:28px; position:relative; overflow:hidden;">
-                    <!-- Brillo decorativo -->
-                    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,0.35),transparent);pointer-events:none;"></div>
-
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                        <span style="font-size:1.6rem;">💻</span>
-                        <p style="color:#5c4d43; font-size:0.93rem; font-weight:700; margin:0; line-height:1.5;">Conoce al Biólogo Polo</p>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:16px;">
-                        El Biólogo Polo es nuestro especialista en acuarística. Con formación en biología y años de experiencia, es quien te puede asesorar sobre el cuidado de tus peces, tortugas y ecosistemas acuáticos. ¡Visita su perfil!
-                    </p>
-
-                    <div style="margin-bottom:20px;">
-                        <a href="https://elpologr.github.io/elpolo/" target="_blank" rel="nofollow"
-                           style="display:flex; align-items:center; gap:0; background:linear-gradient(135deg,#8c7565,#5c4d43); color:white; text-decoration:none; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 5px 20px rgba(92,77,67,0.35); transition:all 0.25s;"
-                           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(92,77,67,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(92,77,67,0.35)';">
-                            <div style="width:80px; height:80px; flex-shrink:0; overflow:hidden; background:rgba(0,0,0,0.2);">
-                                <img src="imagenes/logo-polo.webp" alt="Polo"
-                                     style="width:100%; height:100%; object-fit:cover; display:block;"
-                                     onerror="this.parentElement.innerHTML='<div style=\'width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;\'>🌐</div>'">
-                            </div>
-                            <div style="flex:1; padding:16px 20px; font-size:1rem; font-weight:800; font-family:inherit; letter-spacing:0.5px;">
-                                🌐 Visitar página de Polo
-                            </div>
-                        </a>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:0;">
-                        Mi hijo Polo ha pasado desde bailarín a youtuber, mucho tiempo fue guardia de seguridad y él, junto con su hermano Fer, pusieron en marcha su propia empresa, lo que les permitió dejar de ser empleados con el salario mínimo para tener su propio negocio, apoyándome y creando este entorno familiar que puedes conocer de cerca y saber con confianza que te daremos productos de la mejor calidad: desde asesoría en acuarística hasta diseño de peceras profesionales.
-                    </p>
-                </div>
-
-                <!-- ══════════════════════════════════════ -->
-                <!-- RECUADRO: ELBA RODRÍGUEZ AVALOS      -->
-                <!-- ══════════════════════════════════════ -->
-                <div style="background:linear-gradient(135deg,#fdf3e7,#fae8d0); border:2px solid #e8c89a; border-radius:18px; padding:26px 24px 22px; margin-top:28px; position:relative; overflow:hidden;">
-                    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,0.35),transparent);pointer-events:none;"></div>
-
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                        <span style="font-size:1.6rem;">🎵</span>
-                        <p style="color:#5c4d43; font-size:0.93rem; font-weight:700; margin:0; line-height:1.5;">Acuario Equus — Más de 30 años de experiencia</p>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:16px;">
-                        Desde 1991, Acuario Equus Morelia ha sido el lugar de referencia para los amantes de los peces y la acuarística en Morelia. Contamos con más de 30 años de experiencia ofreciendo los mejores productos y servicios del mercado.
-                    </p>
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:20px;">
-                        Nuestra especialidad son las <strong>peceras profesionales a medida</strong>, el mantenimiento de ecosistemas acuáticos y la venta de peces tropicales, goldfish y tortugas de alta calidad. Visita nuestro Instagram para ver las últimas novedades:
-                    </p>
-
-                    <div style="text-align:center;">
-                    <a href="https://elpologr.github.io/elbarodriguezavalos/" target="_blank" rel="nofollow"
-                       style="display:flex; align-items:center; gap:0; background:linear-gradient(135deg,#8c7565,#5c4d43); color:white; text-decoration:none; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 5px 20px rgba(92,77,67,0.35); transition:all 0.25s;"
-                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(92,77,67,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(92,77,67,0.35)';">
-                        <div style="width:80px; height:80px; flex-shrink:0; overflow:hidden; background:rgba(0,0,0,0.2);">
-                            <img src="imagenes/logo-elba-rodriguez.webp" alt="Elba Rodríguez Avalos"
-                                 style="width:100%; height:100%; object-fit:cover; display:block;"
-                                 onerror="this.parentElement.innerHTML='<div style=\'width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;\'>🎵</div>'">
-                        </div>
-                        <div style="flex:1; padding:16px 20px; font-size:1rem; font-weight:800; font-family:inherit; letter-spacing:0.5px;">
-                            🎶 Visitar página de Elba Rodríguez Avalos
-                        </div>
-                    </a>
-                    </div>
-                </div>
-
-                <!-- ══════════════════════════════════════ -->
-                <!-- RECUADRO: LADY MONCHIS — CHEF GOURMET -->
-                <!-- ══════════════════════════════════════ -->
-                <div style="background:linear-gradient(135deg,#fdf3e7,#fae8d0); border:2px solid #e8c89a; border-radius:18px; padding:26px 24px 22px; margin-top:28px; position:relative; overflow:hidden;">
-                    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,0.35),transparent);pointer-events:none;"></div>
-
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                        <span style="font-size:1.6rem;">🍽️</span>
-                        <p style="color:#5c4d43; font-size:0.93rem; font-weight:700; margin:0; line-height:1.5;">Lady Monchis — Chef Gourmet</p>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:16px;">
-                        Lady Monchis, una de las hermanas de Acuario Equus Morelia, es una increíble chef gourmet. Siempre le he pedido que me haga unas hamburguesas grasosas estilo chatarra, pero ella es exclusivamente gourmet — simplemente no puede permitirse usar elementos saturados de grasas o conservadores artificiales, ni productos animales, y siempre hace conciencia sobre los productos que se crean abusando de animales.
-                    </p>
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:20px;">
-                        Ella jamás te va a hacer un chocolate con excesos de azúcares; para darle una firma de producción de lujo, sabe dónde conseguirte los productos de la más alta calidad, con los mejores sabores y sin conservadores — probablemente con nutrientes escondidos y con un sabor que define su calidad. También puedes visitar su página web a continuación:
-                    </p>
-
-                    <div style="text-align:center;">
-                    <a href="https://elpologr.github.io/ladymonchis/" target="_blank" rel="nofollow"
-                       style="display:flex; align-items:center; gap:0; background:linear-gradient(135deg,#8c7565,#5c4d43); color:white; text-decoration:none; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 5px 20px rgba(92,77,67,0.35); transition:all 0.25s;"
-                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(92,77,67,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(92,77,67,0.35)';">
-                        <div style="width:80px; height:80px; flex-shrink:0; overflow:hidden; background:rgba(0,0,0,0.2);">
-                            <img src="imagenes/logo-lady-monchis.webp" alt="Lady Monchis"
-                                 style="width:100%; height:100%; object-fit:cover; display:block;"
-                                 onerror="this.parentElement.innerHTML='<div style=\'width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;\'>🍽️</div>'">
-                        </div>
-                        <div style="flex:1; padding:16px 20px; font-size:1rem; font-weight:800; font-family:inherit; letter-spacing:0.5px;">
-                            🍴 Visitar página de Lady Monchis
-                        </div>
-                    </a>
-                    </div>
-                </div>
-
-                <!-- ══════════════════════════════════════════ -->
-                <!-- RECUADRO: LADY ORLANDO — ARTISTA VISUAL  -->
-                <!-- ══════════════════════════════════════════ -->
-                <div style="background:linear-gradient(135deg,#fdf3e7,#fae8d0); border:2px solid #e8c89a; border-radius:18px; padding:26px 24px 22px; margin-top:28px; position:relative; overflow:hidden;">
-                    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,0.35),transparent);pointer-events:none;"></div>
-
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                        <span style="font-size:1.6rem;">🎨</span>
-                        <p style="color:#5c4d43; font-size:0.93rem; font-weight:700; margin:0; line-height:1.5;">Lady Orlando — Artista Visual e Ilustradora</p>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:16px;">
-                        Lady Orlando es otra hermana de Acuario Equus Morelia, y otro gran talento artístico de la familia. Es una destacada artista visual e ilustradora: desde que tenía 4 años comenzó a dibujar, pero sin duda destacó por su gran talento, especialmente en el puntillismo y el trazo fino.
-                    </p>
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:20px;">
-                        Ha sido reconocida internacionalmente por su técnica minuciosa y detallada, y su estilo melancólico y solitario. Puede lograr retratos detallados de personajes reales o imaginarios, incluyendo magníficas ilustraciones inspiradas en músicos y cineastas. También puedes visitar su página web a continuación:
-                    </p>
-
-                    <div style="text-align:center;">
-                    <a href="https://elpologr.github.io/ladyorlando/" target="_blank" rel="nofollow"
-                       style="display:flex; align-items:center; gap:0; background:linear-gradient(135deg,#8c7565,#5c4d43); color:white; text-decoration:none; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 5px 20px rgba(92,77,67,0.35); transition:all 0.25s;"
-                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(92,77,67,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(92,77,67,0.35)';">
-                        <div style="width:80px; height:80px; flex-shrink:0; overflow:hidden; background:rgba(0,0,0,0.2);">
-                            <img src="imagenes/logo-lady-orlando.webp" alt="Lady Orlando"
-                                 style="width:100%; height:100%; object-fit:cover; display:block;"
-                                 onerror="this.parentElement.innerHTML='<div style=\'width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;\'>🖋️</div>'">
-                        </div>
-                        <div style="flex:1; padding:16px 20px; font-size:1rem; font-weight:800; font-family:inherit; letter-spacing:0.5px;">
-                            🖋️ Visitar página de Lady Orlando
-                        </div>
-                    </a>
-                    </div>
-                </div>
-
-                <!-- ══════════════════════════════════════════ -->
-                <!-- RECUADRO: EL BIÓLOGO POLO — ACUARIO      -->
-                <!-- ══════════════════════════════════════════ -->
-                <div style="background:linear-gradient(135deg,#fdf3e7,#fae8d0); border:2px solid #e8c89a; border-radius:18px; padding:26px 24px 22px; margin-top:28px; position:relative; overflow:hidden;">
-                    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,0.35),transparent);pointer-events:none;"></div>
-
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                        <span style="font-size:1.6rem;">🐠</span>
-                        <p style="color:#5c4d43; font-size:0.93rem; font-weight:700; margin:0; line-height:1.5;">El Biólogo Polo — Acuario & Especies Marinas</p>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:16px;">
-                        El Biólogo Polo no es el mismo Polo que creó la página — esta vez estamos hablando del hermano de Acuario Equus Morelia. El Biólogo Polo tiene un acuario y ofrece los servicios más profesionales y completos para instalación de peceras, adaptación de entornos marinos, filtros de agua dulce y salada para diferentes especies, y aditivos de todo tipo necesarios para la alimentación y el cuidado de tus mascotas acuáticas.
-                    </p>
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:20px;">
-                        Te invito a que visites su página web — te recordará aquellas visitas al acuario del vecindario o al zoológico de tu infancia:
-                    </p>
-
-                    <div style="text-align:center;">
-                    <a href="https://elpologr.github.io/equusacuario/" target="_blank" rel="nofollow"
-                       style="display:flex; align-items:center; gap:0; background:linear-gradient(135deg,#8c7565,#5c4d43); color:white; text-decoration:none; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 5px 20px rgba(92,77,67,0.35); transition:all 0.25s;"
-                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(92,77,67,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(92,77,67,0.35)';">
-                        <div style="width:80px; height:80px; flex-shrink:0; overflow:hidden; background:rgba(0,0,0,0.2);">
-                            <img src="imagenes/logo-equus-acuario.webp" alt="Equus Acuario"
-                                 style="width:100%; height:100%; object-fit:cover; display:block;"
-                                 onerror="this.parentElement.innerHTML='<div style=\'width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;\'>🐟</div>'">
-                        </div>
-                        <div style="flex:1; padding:16px 20px; font-size:1rem; font-weight:800; font-family:inherit; letter-spacing:0.5px;">
-                            🐟 Visitar Equus Acuario
-                        </div>
-                    </a>
-                    </div>
-                </div>
-
-                <!-- ══════════════════════════════════════════ -->
-                <!-- RECUADRO: VÍCTOR MORÁN — MÚSICO / VOCAL   -->
-                <!-- ══════════════════════════════════════════ -->
-                <div style="background:linear-gradient(135deg,#fdf3e7,#fae8d0); border:2px solid #e8c89a; border-radius:18px; padding:26px 24px 22px; margin-top:28px; position:relative; overflow:hidden;">
-                    <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,130,0.35),transparent);pointer-events:none;"></div>
-
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                        <span style="font-size:1.6rem;">🎤</span>
-                        <p style="color:#5c4d43; font-size:0.93rem; font-weight:700; margin:0; line-height:1.5;">Víctor Morán — Vocalista & Compositor</p>
-                    </div>
-
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:16px;">
-                        Víctor Morán es otro talento artístico de la familia — esta vez no es hermano ni hijo de Acuario Equus Morelia, sino su primo. Al igual que Elba Rodríguez, siguió el camino de la música y la composición de letras, sobre todo enfocado al Pop, Rock, Funk y R&B.
-                    </p>
-                    <p style="color:#5c4d43; line-height:1.85; font-size:0.93rem; margin-bottom:20px;">
-                        Su camino lo llevó a convertirse en vocalista de Marco Antonio Solís, y continúa construyendo su marca con nueva música a su propio estilo. Puedes visitar su página a continuación:
-                    </p>
-
-                    <div style="text-align:center;">
-                    <a href="https://elpologr.github.io/victormoran/" target="_blank" rel="nofollow"
-                       style="display:flex; align-items:center; gap:0; background:linear-gradient(135deg,#8c7565,#5c4d43); color:white; text-decoration:none; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 5px 20px rgba(92,77,67,0.35); transition:all 0.25s;"
-                       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(92,77,67,0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 20px rgba(92,77,67,0.35)';">
-                        <div style="width:80px; height:80px; flex-shrink:0; overflow:hidden; background:rgba(0,0,0,0.2);">
-                            <img src="imagenes/logo-victor-moran.webp" alt="Víctor Morán"
-                                 style="width:100%; height:100%; object-fit:cover; display:block;"
-                                 onerror="this.parentElement.innerHTML='<div style=\'width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;\'>🎵</div>'">
-                        </div>
-                        <div style="flex:1; padding:16px 20px; font-size:1rem; font-weight:800; font-family:inherit; letter-spacing:0.5px;">
-                            🎵 Visitar página de Víctor Morán
-                        </div>
-                    </a>
-                    </div>
-                </div>
-
-                <!-- Cierre decorativo -->
-                <div style="font-size:1.1rem; letter-spacing:10px; text-align:center; color:#c9a98a; margin-top:32px;">✦ &nbsp; ✦ &nbsp; ✦</div>
-            </div>
-
-            <!-- Grid videos responsivo en móvil: 1 columna -->
+                        <!-- Grid videos responsivo en móvil: 1 columna -->
             
         </div>
     </div>
@@ -849,7 +608,6 @@
 
         <!-- ===== BOTONES DE MODO: PRODUCTOS / ARREGLOS / DECORACIONES / ETIQUETAS ===== -->
         <div class="selector-modo-velas">
-            <button class="btn-modo-velas" id="btnModoTodos" onclick="cambiarModoVelas('todos')">🛍️ Todo el Catálogo</button>
             <button class="btn-modo-velas activo" id="btnModoArreglos" onclick="cambiarModoVelas('arreglos')">🐟 Peces y Tortugas</button>
             <button class="btn-modo-velas" id="btnModoDecoraciones" onclick="cambiarModoVelas('decoraciones')">🦐 Accesorios y Alimentos</button>
             <button class="btn-modo-velas" id="btnModoEtiquetas" onclick="cambiarModoVelas('etiquetas')">🏊 Servicios de Pecera</button>

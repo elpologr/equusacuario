@@ -2135,13 +2135,15 @@
             background: #f0eae4;
             border: 2px solid #d4c5b8;
             color: #5c4d43;
-            padding: 9px 22px;
-            font-size: 14px;
+            padding: 18px 44px;
+            font-size: 28px;
             font-weight: 700;
             border-radius: 999px;
             cursor: pointer;
             transition: all 0.22s;
-            white-space: nowrap;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.3;
         }
         .pill-btn.activo {
             background: #8c7565;
@@ -2170,6 +2172,22 @@
             margin: 0 12px;
         }
         body.modo-oscuro .pill-panel-inner { background: #1e1e1e; border-color: #333; }
+        /* Modo oscuro: textos negros del catálogo se vuelven blancos */
+        body.modo-oscuro #zona-catalogo h2,
+        body.modo-oscuro #zona-catalogo h3,
+        body.modo-oscuro #zona-catalogo p,
+        body.modo-oscuro #zona-catalogo span,
+        body.modo-oscuro #zona-catalogo label,
+        body.modo-oscuro .card-dinamica .card-nombre,
+        body.modo-oscuro .card-dinamica .card-desc,
+        body.modo-oscuro .titulo-producto,
+        body.modo-oscuro .info-producto p,
+        body.modo-oscuro .info-producto span {
+            color: #e0d5cc !important;
+        }
+        body.modo-oscuro #zona-catalogo {
+            color: #e0d5cc;
+        }
 
         /* ===== BOTÓN ME GUSTA ===== */
         .btn-like {
@@ -3208,4 +3226,14 @@ body.modo-oscuro .cart-total-valor { color: #f0e8e0; }
         margin-right: 0 !important;
         box-sizing: border-box !important;
     }
+}
+
+/* ── MODO OSCURO: textos con color negro inline (color:#111, color:#362a22, etc.) ── */
+body.modo-oscuro h1,
+body.modo-oscuro h2,
+body.modo-oscuro h3 {
+    color: #e0d5cc !important;
+}
+body.modo-oscuro #tituloVelasKukumita {
+    color: #f0e8e0 !important;
 }
