@@ -47,7 +47,20 @@
             padding: 0;
             height: 400px;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+        }
+
+        /* Imagen caballito — esquina inferior izquierda del banner */
+        header .caballito-banner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 85%;
+            max-height: 340px;
+            width: auto;
+            z-index: 2;
+            pointer-events: none;
+            display: block;
         }
 
         /* En móvil: usa contain para que el banner completo sea visible sin recortes */
@@ -55,15 +68,13 @@
             header {
                 background-size: contain;
                 background-position: center center;
-                height: auto;
-                /* El padding-bottom define la altura proporcional al ancho de pantalla.
-                   Calcula: (alto_imagen / ancho_imagen) * 100 = %
-                   Ejemplos comunes:
-                     Banner 1200x400 (3:1)  → 33.33%
-                     Banner 1200x300 (4:1)  → 25%
-                     Banner 1200x500 (~2.4:1) → 41.67%
-                   Ajusta este valor según las dimensiones reales de tu equusbanner.webp */
+                height: 0;
                 padding-bottom: 33.33%;
+                overflow: visible;
+            }
+            header .caballito-banner {
+                height: 70%;
+                max-height: none;
             }
         }
 
