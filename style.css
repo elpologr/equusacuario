@@ -1426,9 +1426,9 @@
             width: 100%;
         }
         .btn-modo-velas {
-            background-color: #f0eae4;
-            border: 2px solid #d4c5b8;
-            color: #111;
+            background-color: #c9a98a;
+            border: 2px solid #b8967a;
+            color: #fff;
             font-size: 15px;
             font-weight: 600;
             border-radius: 20px;
@@ -1442,13 +1442,14 @@
             white-space: nowrap;
         }
         .btn-modo-velas.activo {
-            background-color: #8c7565;
-            border-color: #8c7565;
-            color: white;
+            background-color: #6b4f3a;
+            border-color: #5c3e2c;
+            color: #fff;
         }
         .btn-modo-velas:hover:not(.activo) {
-            border-color: #8c7565;
-            color: #000;
+            background-color: #b8967a;
+            border-color: #a0825e;
+            color: #fff;
         }
 
         /* ===== BARRA DE BÚSQUEDA UNIFICADA ===== */
@@ -3341,17 +3342,17 @@ body.modo-oscuro .zona-titulo-pagina h2 { color: #e0d5cc !important; }
 /* ════════════════════════════════════════════════════
    BOTONES MODO CATÁLOGO — beige permanente, texto blanco
    ════════════════════════════════════════════════════ */
-.btn-modo-velas {
+.selector-modo-velas .btn-modo-velas {
     background-color: #c9a98a !important;
     border-color: #b8967a !important;
     color: #fff !important;
 }
-.btn-modo-velas.activo {
+.selector-modo-velas .btn-modo-velas.activo {
     background-color: #6b4f3a !important;
     border-color: #5c3e2c !important;
     color: #fff !important;
 }
-.btn-modo-velas:hover:not(.activo) {
+.selector-modo-velas .btn-modo-velas:hover:not(.activo) {
     background-color: #b8967a !important;
     border-color: #a0825e !important;
     color: #fff !important;
