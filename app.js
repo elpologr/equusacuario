@@ -242,12 +242,22 @@ function csvAProductos(filas) {
             ? _rawImg.split(',').map(function(s) { return s.trim().replace(/^"+|"+$/g, ''); }).filter(Boolean)
             : [];
 
-        // Columna E: puede tener una o varias etiquetas separadas por | (ej: "pez|planta")
-        // Se limpian comillas extra que Google Sheets agrega cuando hay validación de lista en la celda.
+        // Columna E: EtiquetaPrincipal — soporta separadores | o , y normaliza a minúsculas
+        // Valores esperados: pez, tortuga, pecera, pesera, filtro, producto
         var _rawTipos = get(4).replace(/^"+|"+$/g, '').trim();
+        var _sep = _rawTipos.includes('|') ? '|' : ',';
         var tiposArray = _rawTipos
-            ? _rawTipos.split('|').map(function(s) { return s.trim().replace(/^"+|"+$/g, '').toLowerCase(); }).filter(Boolean)
+            ? _rawTipos.split(_sep).map(function(s) { return s.trim().replace(/^"+|"+$/g, '').toLowerCase(); }).filter(Boolean)
             : ['producto'];
+        // Normalizar variantes: "Pez" → "pez", "Pecera" → "pecera"
+        tiposArray = tiposArray.map(function(t) {
+            if (t === 'peces') return 'pez';
+            if (t === 'peceras' || t === 'pesera' || t === 'peseras') return 'pecera';
+            if (t === 'filtros') return 'filtro';
+            if (t === 'tortugas') return 'tortuga';
+            if (t === 'productos') return 'producto';
+            return t;
+        });
         // tipo principal = primer valor (compatibilidad con código existente)
         var tipoPrincipal = tiposArray[0] || 'producto';
 
@@ -1463,15 +1473,14 @@ if (document.readyState === 'loading') {
         const rawTipos = (card.getAttribute('data-tipos') || card.getAttribute('data-tipo') || '');
         const tipos = rawTipos.toLowerCase().replace(/^"+|"+$/g, '').split('|').map(s => s.trim().replace(/^"+|"+$/g, '')).filter(Boolean);
         const variantes = {
-            'producto':      ['producto','productos'],
-            'arreglo':       ['arreglo','arreglos'],
-            'decoracion':    ['decoracion','decoraciones','aditamento','aditamentos','filtro','filtros'],
-            'etiqueta':      ['etiqueta','etiquetas'],
             'pez':           ['pez','peces'],
             'tortuga':       ['tortuga','tortugas'],
-            'pesera':        ['pesera','peseras','pecera','peceras'],
+            'pecera':        ['pecera','peceras','pesera','peseras'],
             'filtro':        ['filtro','filtros'],
-            'producto_acc':  ['producto','productos']
+            'producto':      ['producto','productos'],
+            'arreglo':       ['arreglo','arreglos','pez','peces','tortuga','tortugas'],
+            'decoracion':    ['decoracion','decoraciones','aditamento','aditamentos','filtro','filtros','producto','productos'],
+            'etiqueta':      ['etiqueta','etiquetas','pecera','peceras','pesera','peseras']
         };
         return buscar.some(function(b) {
             const lista = variantes[b] || [b];
@@ -1502,13 +1511,13 @@ if (document.readyState === 'loading') {
             const okEvento = eventoActivo === 'todos' || eventoCard.split(' ').includes(eventoActivo);
 
             if (panel === 'decoraciones') {
-                // Accesorios / Filtros y otros productos → etiqueta principal: filtro o producto
-                const esFiltroOProducto = tieneTipo(card, 'filtro') || tieneTipo(card, 'producto_acc');
-                card.classList.toggle('oculto', !(esFiltroOProducto && okNombre));
+                // "Filtros y otros productos": etiqueta filtro o producto
+                card.classList.toggle('oculto', !(
+                    (tieneTipo(card, 'filtro') || tieneTipo(card, 'producto')) && okNombre
+                ));
             } else if (panel === 'etiquetas') {
-                // Servicios de Pecera → etiqueta principal: pesera/pecera
-                const esPesera = tieneTipo(card, 'pesera');
-                card.classList.toggle('oculto', !(esPesera && okNombre && okEvento));
+                // "Servicios de Pecera": etiqueta pecera/pesera
+                card.classList.toggle('oculto', !(tieneTipo(card, 'pecera') && okNombre && okEvento));
             } else if (panel === 'arreglos') {
                 // Respetar también el filtro de precio activo en arreglos
                 let okPrecio = true;
@@ -1518,7 +1527,7 @@ if (document.readyState === 'loading') {
                         : String(parseInt(card.getAttribute('data-precio') || '0', 10));
                     okPrecio = pAttr === precioArreglosActivo;
                 }
-                card.classList.toggle('oculto', !(( tieneTipo(card, 'pez') || tieneTipo(card, 'tortuga') ) && okNombre && okForma && okEvento && okPrecio));
+                card.classList.toggle('oculto', !((tieneTipo(card, 'pez') || tieneTipo(card, 'tortuga')) && okNombre && okForma && okEvento && okPrecio));
             } else {
                 // panel === 'todos' (Productos): muestra solo los que tienen tipo 'producto'
                 card.classList.toggle('oculto', !(tieneTipo(card, 'producto') && okNombre && okForma && okEvento));
@@ -1598,7 +1607,7 @@ if (document.readyState === 'loading') {
         document.querySelectorAll('.card-dinamica').forEach(card => {
             let visible = true;
 
-            // Solo mostrar tarjetas que tengan tipo pez o tortuga
+            // Peces y Tortugas: solo mostrar tarjetas con tipo pez o tortuga
             if (!tieneTipo(card, 'pez') && !tieneTipo(card, 'tortuga')) {
                 card.classList.add('oculto');
                 return;
