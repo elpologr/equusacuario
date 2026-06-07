@@ -46,6 +46,8 @@
             background-repeat: no-repeat;
             padding: 0;
             height: 400px;
+            position: relative;
+            overflow: hidden;
         }
 
         /* En móvil: usa contain para que el banner completo sea visible sin recortes */
