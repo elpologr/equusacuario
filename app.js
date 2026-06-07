@@ -163,19 +163,22 @@ function _resetBotonesRed() {
 // Para editar productos: abre el link de Google Sheets y modifica las filas.
 //
 // 🔧 CONFIGURACIÓN — cambia solo esta línea si mueves la hoja:
-var SHEET_ID = '1jin2wMYingvbPD2csGxIbm5AhulfRvCRvIzAKJTUNMw';
+var SHEET_ID = '1uZuLWYaNZQi86mbar_goI10pz9X8tFBR5FlsY2LTBzA';
 // ──────────────────────────────────────────────────────────────────────────────
 // COLUMNAS ESPERADAS EN LA HOJA (fila 1 = encabezados, datos desde fila 2):
-//   A: nombre            — nombre del producto
-//   B: precio            — precio original en MXN (número)
-//   C: precioBazar       — precio de bazar en MXN (número, opcional)
-//   D: descripcion       — texto de descripción del producto
-//   E: imagen            — URL o ruta de la imagen principal
-//   F: etiquetaPrincipal — tipo de producto (ej: arreglo, producto…)
-//   G: subEtiqueta       — subtags separados por | (ej: Cirio|Etiqueta|Medallón)
-//   H: etiquetaEvento    — eventos separados por coma (ej: boda,bautizo)
-//   I: alto              — altura del producto (ej: 15 cm)
-//   J: ancho             — anchura del producto (ej: 8 cm)
+//   A: Nombre            — nombre del producto
+//   B: Precio            — precio original en MXN (número)
+//   C: Precio Mayoreo    — precio de mayoreo en MXN (número, opcional)
+//   D: Descripcion       — texto de descripción del producto
+//   E: Imagen            — URL de la imagen principal (puede ser imgbb)
+//   F: EtiquetaPrincipal — tipo de producto separados por | (ej: pez|planta)
+//   G: SubEtiqueta       — subtags separados por | (ej: Tropical|Marino)
+//   H: SubImagen1        — URL de imagen relacionada 1 (imgbb)
+//   I: SubImagen2        — URL de imagen relacionada 2 (imgbb)
+//   J: SubImagen3        — URL de imagen relacionada 3 (imgbb)
+//   K: SubImagen4        — URL de imagen relacionada 4 (imgbb)
+//
+// 📷 ÁLBUM DE IMÁGENES: https://ibb.co/album/SXC5S7
 // ══════════════════════════════════════════════════════════════════════════════
 
 var listaProductos = [];
@@ -229,25 +232,32 @@ function csvAProductos(filas) {
         // Saltar filas sin nombre
         if (!get(0)) continue;
 
-        // A=0 nombre, B=1 precio, C=2 precioBazar, D=3 descripcion,
-        // E=4 imagen, F=5 etiquetaPrincipal (puede tener varias separadas por |), G=6 subEtiqueta, H=7 etiquetaEvento
-        // I=8 alto, J=9 ancho
+        // A=0 Nombre, B=1 Precio, C=2 PrecioMayoreo, D=3 Descripcion,
+        // E=4 Imagen (URL imgbb principal), F=5 EtiquetaPrincipal (separadas por |),
+        // G=6 SubEtiqueta (separadas por |),
+        // H=7 SubImagen1, I=8 SubImagen2, J=9 SubImagen3, K=10 SubImagen4
 
-        // Imágenes: columna E puede tener varias URLs separadas por coma.
-        // Se limpian comillas extra que Google Sheets puede agregar al exportar CSV.
+        // Columna E: URL de imagen principal desde imgbb
         var _rawImg = get(4).replace(/^"+|"+$/g, '').trim();
         var imagenesExtra = _rawImg
             ? _rawImg.split(',').map(function(s) { return s.trim().replace(/^"+|"+$/g, ''); }).filter(Boolean)
             : [];
 
-        // Columna F: puede tener una o varias etiquetas separadas por | (ej: "arreglo|decoracion")
+        // Columna F: puede tener una o varias etiquetas separadas por | (ej: "pez|planta")
         // Se limpian comillas extra que Google Sheets agrega cuando hay validación de lista en la celda.
         var _rawTipos = get(5).replace(/^"+|"+$/g, '').trim();
         var tiposArray = _rawTipos
             ? _rawTipos.split('|').map(function(s) { return s.trim().replace(/^"+|"+$/g, '').toLowerCase(); }).filter(Boolean)
-            : ['arreglo'];
+            : ['producto'];
         // tipo principal = primer valor (compatibilidad con código existente)
-        var tipoPrincipal = tiposArray[0] || 'arreglo';
+        var tipoPrincipal = tiposArray[0] || 'producto';
+
+        // SubImagenes: columnas H–K (índices 7–10)
+        var _subImagenes = [];
+        for (var si = 7; si <= 10; si++) {
+            var rawSI = (f[si] || '').trim().replace(/^"+|"+$/g, '').trim();
+            if (rawSI) _subImagenes.push(rawSI);
+        }
 
         productos.push({
             id:           i,
@@ -260,25 +270,13 @@ function csvAProductos(filas) {
             forma:        '',
             tipo:         tipoPrincipal,
             tipos:        tiposArray,
-            subtags:      get(6) ? get(6).split(',').map(function(s){ return s.trim(); }).filter(Boolean).join('|') : '',
-            eventos:      get(7)
-                            ? get(7).split(',').map(function(s){ return s.trim().toLowerCase(); }).filter(Boolean).join(' ')
-                            : '',
+            subtags:      get(6) ? get(6).split('|').map(function(s){ return s.trim(); }).filter(Boolean).join('|') : '',
+            eventos:      '',
             etiquetas:    tiposArray,
             aditivos:     [],
-            alto:         get(8),
-            ancho:        get(9),
-            subImagenes:  (function() {
-                // Columnas K-R (índices 10-17): SubImagen1…SubImagen8
-                // Cada celda contiene la URL de la imagen del producto relacionado.
-                // Al abrir el modal, se busca automáticamente el producto que tenga esa URL.
-                var arr = [];
-                for (var si = 10; si <= 17; si++) {
-                    var rawSI = (f[si] || '').trim().replace(/^"+|"+$/g, '').trim();
-                    if (rawSI) arr.push(rawSI);
-                }
-                return arr;
-            })()
+            alto:         '',
+            ancho:        '',
+            subImagenes:  _subImagenes
         });
     }
     return productos;
@@ -1365,8 +1363,8 @@ if (document.readyState === 'loading') {
         document.body.classList.toggle('modo-oscuro');
         localStorage.setItem('acuario-modo-oscuro', document.body.classList.contains('modo-oscuro') ? '1' : '0');
     }
-    // Restaurar preferencia guardada
-    if (localStorage.getItem('acuario-modo-oscuro') === '1') {
+    // Modo oscuro por defecto. Solo se desactiva si el usuario lo apagó explícitamente.
+    if (localStorage.getItem('acuario-modo-oscuro') !== '0') {
         document.body.classList.add('modo-oscuro');
     }
 
@@ -2146,16 +2144,16 @@ function renderizarResultadosDrawer(lista, titulo) {
 
 
 // ═══════════════════════════════════════════
-//  FIREBASE CONFIGURACIÓN
+//  FIREBASE CONFIGURACIÓN — Equus Acuario
 // ═══════════════════════════════════════════
 const firebaseConfig = {
-    apiKey: "AIzaSyBc_AUz1lfgAPFuQd9oKvDYGm1lyrHALGs",
-    authDomain: "velas-kukumita.firebaseapp.com",
-    projectId: "velas-kukumita",
-    storageBucket: "velas-kukumita.firebasestorage.app",
-    messagingSenderId: "76727611900",
-    appId: "1:76727611900:web:8eb54f485d2da99e40c279",
-    measurementId: "G-KPV214PPVY"
+    apiKey: "AIzaSyA1kzo0ve8RZ6JlSZxhOM9Xh7DsRZcv-iM",
+    authDomain: "equusacuario.firebaseapp.com",
+    projectId: "equusacuario",
+    storageBucket: "equusacuario.firebasestorage.app",
+    messagingSenderId: "177193358262",
+    appId: "1:177193358262:web:551ff83edd54e4822d2717",
+    measurementId: "G-ZK011KP9QG"
 };
 
 firebase.initializeApp(firebaseConfig);
