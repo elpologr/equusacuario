@@ -199,22 +199,10 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             <span>Facebook</span>
         </a>
-        <a class="red-social tt" href="https://www.facebook.com/Polo72" target="_blank" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
-            <span>TikTok</span>
-        </a>
-        <a class="red-social xtwt" href="https://wa.me/524432274721" target="_blank" aria-label="WhatsApp Business">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            <span>X</span>
-        </a>
         <a class="red-social ml" href="https://www.google.com/maps/search/Astronomos+180,+Colonia+Cosmos,+Morelia,+Mexico+58050" target="_blank" aria-label="Google Maps">
             <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#333"/></svg>
             <span style="color:#333;">📍 Maps</span>
         </a>
-        <button class="red-social uber" onclick="abrirModalUber()" aria-label="Uber Envíos">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c.96 0 1.86.25 2.65.68L6.68 14.65A4.97 4.97 0 0 1 7 12c0-2.76 2.24-5 5-5zm0 14c-.96 0-1.86-.25-2.65-.68l7.97-7.97c.43.79.68 1.69.68 2.65 0 2.76-2.24 5-5 5z"/></svg>
-            <span>Uber Envíos</span>
-        </button>
         <button class="red-social compartir" onclick="abrirModalQR()" aria-label="Compartir QR">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
             <span>Compartir</span>
@@ -222,65 +210,33 @@
     </div>
 
     <!-- ===== IMAGEN DE PERFIL DE LA PÁGINA ===== -->
-    <div style="display:flex; justify-content:center; align-items:center; padding:28px 16px; background:#fff; border-bottom:1px solid #eee;">
+    <div class="zona-perfil-pagina" style="display:flex; justify-content:center; align-items:center; padding:28px 16px; background:#fff; border-bottom:1px solid #eee;">
         <div style="position:relative;">
             <div id="imgPerfilBtn"
-                 onclick="event.stopPropagation(); toggleSubmenuPerfil('imagen')"
-                 style="width:400px; height:400px; max-width:90vw; max-height:90vw; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.12); cursor:pointer; transition:transform 0.2s, box-shadow 0.2s; position:relative;"
-                 onmouseover="this.style.transform='scale(1.015)'; this.style.boxShadow='0 8px 32px rgba(0,0,0,0.18)';"
-                 onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 24px rgba(0,0,0,0.12)';">
+                 style="width:400px; height:400px; max-width:90vw; max-height:90vw; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.12); position:relative;">
                 <img src="imagenes/perfilequus.webp" alt="Acuario Equus Morelia" style="width:100%; height:100%; object-fit:cover; display:block;">
-
-            </div>
-            <!-- Submenú de imagen -->
-            <div id="submenuImagen" style="display:none; position:absolute; top:calc(100% + 12px); left:50%; transform:translateX(-50%); background:#fff; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.18); border:1.5px solid #e8ddd5; min-width:240px; z-index:500; overflow:hidden; animation:submenuFadeIn 0.2s ease;">
-                <div style="padding:16px 18px 14px; text-align:center;">
-                    <p style="margin:0 0 14px; font-size:0.82rem; color:#8c7565; line-height:1.6;">Acuarística profesional en Morelia, Michoacán desde 1991.</p>
-                    <button onclick="irAZonaInteractiva(); cerrarSubmenus();"
-                        style="width:100%; background:linear-gradient(135deg,#f5a623,#e8921a); color:white; border:none; border-radius:999px; padding:12px 20px; font-size:0.9rem; font-weight:800; cursor:pointer; font-family:inherit; transition:opacity 0.2s;"
-                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                        🎉 Visitar Zona Interactiva
-                    </button>
-                </div>
             </div>
         </div>
     </div>
 
     <!-- ===== TÍTULO DE PÁGINA + BOTÓN BAZAR + BOTÓN TIENDA ===== -->
-    <div style="text-align:center; padding: 24px 16px 18px; background:#fff; border-bottom: 1px solid #eee; overflow:hidden; box-sizing:border-box; width:100%;">
-        <!-- Wrapper del título con submenú posicionado -->
-        <div style="position:relative; display:inline-block; margin-bottom:14px;">
+    <div class="zona-titulo-pagina" style="text-align:center; padding: 24px 16px 18px; background:#fff; border-bottom: 1px solid #eee; overflow:hidden; box-sizing:border-box; width:100%;">
+        <!-- Título estático (sin submenú) -->
+        <div style="margin-bottom:14px;">
             <h1 id="tituloVelasKukumita"
-                onclick="event.stopPropagation(); toggleSubmenuPerfil('titulo')"
-                style="font-size:4rem; font-weight:900; color:#111; letter-spacing:3px; margin:0; font-family:'Playfair Display',Georgia,serif; font-style:italic; line-height:1.1; cursor:pointer; transition:color 0.2s; user-select:none; display:block;"
-                onmouseover="this.style.color='#8c7565'"
-                onmouseout="this.style.color='#111'">Acuario Equus Morelia</h1>
-            <!-- Submenú del título — aparece debajo, centrado -->
-            <div id="submenuTitulo" style="display:none; position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%); background:#fff; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.18); border:1.5px solid #e8ddd5; min-width:280px; z-index:600; overflow:hidden; animation:submenuFadeIn 0.2s ease;">
-                <div style="padding:14px 18px 10px; border-bottom:1px solid #f0eae4;">
-                    <p style="margin:0; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#aaa;">Nombre del negocio</p>
-                </div>
-                <div style="padding:18px 18px 14px;">
-                    <p style="font-family:'Playfair Display',Georgia,serif; font-style:italic; font-size:1.5rem; font-weight:900; color:#111; margin:0 0 16px; text-align:center; letter-spacing:2px;">Acuario Equus Morelia</p>
-                    <p style="font-size:0.82rem; color:#8c7565; margin:0 0 16px; text-align:center; line-height:1.6;">Acuarística profesional en ecosistemas acuáticos desde 1991 en Morelia, Michoacán.</p>
-                    <button onclick="irAZonaInteractiva(); cerrarSubmenus();"
-                        style="width:100%; background:linear-gradient(135deg,#f5a623,#e8921a); color:white; border:none; border-radius:999px; padding:12px 20px; font-size:0.9rem; font-weight:800; cursor:pointer; font-family:inherit; transition:opacity 0.2s;"
-                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                        🎉 Visitar Zona Interactiva
-                    </button>
-                </div>
-            </div>
+                style="font-size:4rem; font-weight:900; color:#111; letter-spacing:3px; margin:0; font-family:'Playfair Display',Georgia,serif; font-style:italic; line-height:1.1; display:block;">Acuario Equus Morelia</h1>
         </div>
 
         <!-- Botones de navegación -->
         <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center; padding: 0 12px; box-sizing:border-box; width:100%;">
-            <!-- Botón Búscanos en Tienda -->
-            <a href="#" onclick="event.preventDefault(); abrirModalTienda()"
+            <!-- Enlace directo a Google Maps -->
+            <a href="https://www.google.com/maps/search/Astronomos+180,+Colonia+Cosmos,+Morelia,+Mexico+58050"
+               target="_blank"
                style="display:inline-flex; align-items:center; gap:10px; background:#5c4d43; color:white; text-decoration:none; border-radius:999px; padding:14px 24px; font-size:1.1rem; font-weight:700; font-family:inherit; box-shadow:0 4px 18px rgba(92,77,67,0.3); transition:all 0.25s; cursor:pointer; border:none; justify-content:center; flex:1; min-width:140px; max-width:300px;">
                 <span style="width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.4rem;">📍</span>
                 <span style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; letter-spacing:1px;">Nuestra Ubicación</span>
             </a></div>
-        <p style="font-size:0.78rem; color:#aaa; margin:10px 0 0; letter-spacing:0.3px;">↓ Ver próximas fechas, ubicaciones y horarios</p>
+        
     </div>
 
     <!-- ===== MODAL UBER ENVÍOS ===== -->

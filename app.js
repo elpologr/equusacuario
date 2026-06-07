@@ -242,14 +242,12 @@ function csvAProductos(filas) {
             ? _rawImg.split(',').map(function(s) { return s.trim().replace(/^"+|"+$/g, ''); }).filter(Boolean)
             : [];
 
-        // Columna E: EtiquetaPrincipal — soporta separadores | o , y normaliza a minúsculas
-        // Valores esperados: pez, tortuga, pecera, pesera, filtro, producto
+        // Columna E: EtiquetaPrincipal — soporta | o , y normaliza a minúsculas
         var _rawTipos = get(4).replace(/^"+|"+$/g, '').trim();
         var _sep = _rawTipos.includes('|') ? '|' : ',';
         var tiposArray = _rawTipos
             ? _rawTipos.split(_sep).map(function(s) { return s.trim().replace(/^"+|"+$/g, '').toLowerCase(); }).filter(Boolean)
             : ['producto'];
-        // Normalizar variantes: "Pez" → "pez", "Pecera" → "pecera"
         tiposArray = tiposArray.map(function(t) {
             if (t === 'peces') return 'pez';
             if (t === 'peceras' || t === 'pesera' || t === 'peseras') return 'pecera';
@@ -258,7 +256,6 @@ function csvAProductos(filas) {
             if (t === 'productos') return 'producto';
             return t;
         });
-        // tipo principal = primer valor (compatibilidad con código existente)
         var tipoPrincipal = tiposArray[0] || 'producto';
 
         // SubImagenes: columnas G–J (índices 6–9)
@@ -1511,12 +1508,8 @@ if (document.readyState === 'loading') {
             const okEvento = eventoActivo === 'todos' || eventoCard.split(' ').includes(eventoActivo);
 
             if (panel === 'decoraciones') {
-                // "Filtros y otros productos": etiqueta filtro o producto
-                card.classList.toggle('oculto', !(
-                    (tieneTipo(card, 'filtro') || tieneTipo(card, 'producto')) && okNombre
-                ));
+                card.classList.toggle('oculto', !((tieneTipo(card, 'filtro') || tieneTipo(card, 'producto')) && okNombre));
             } else if (panel === 'etiquetas') {
-                // "Servicios de Pecera": etiqueta pecera/pesera
                 card.classList.toggle('oculto', !(tieneTipo(card, 'pecera') && okNombre && okEvento));
             } else if (panel === 'arreglos') {
                 // Respetar también el filtro de precio activo en arreglos
@@ -1607,7 +1600,7 @@ if (document.readyState === 'loading') {
         document.querySelectorAll('.card-dinamica').forEach(card => {
             let visible = true;
 
-            // Peces y Tortugas: solo mostrar tarjetas con tipo pez o tortuga
+            // Peces y Tortugas: solo pez o tortuga
             if (!tieneTipo(card, 'pez') && !tieneTipo(card, 'tortuga')) {
                 card.classList.add('oculto');
                 return;
