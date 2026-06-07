@@ -40,7 +40,7 @@
 
         header {
             background-color: #8c7565;
-            background-image: url('imagenes/banner-kukumita.webp');
+            background-image: url('imagenes/equusbanner.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -60,7 +60,7 @@
                      Banner 1200x400 (3:1)  → 33.33%
                      Banner 1200x300 (4:1)  → 25%
                      Banner 1200x500 (~2.4:1) → 41.67%
-                   Ajusta este valor según las dimensiones reales de tu banner-kukumita.webp */
+                   Ajusta este valor según las dimensiones reales de tu equusbanner.webp */
                 padding-bottom: 33.33%;
             }
         }

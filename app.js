@@ -167,16 +167,15 @@ var SHEET_ID = '1uZuLWYaNZQi86mbar_goI10pz9X8tFBR5FlsY2LTBzA';
 // ──────────────────────────────────────────────────────────────────────────────
 // COLUMNAS ESPERADAS EN LA HOJA (fila 1 = encabezados, datos desde fila 2):
 //   A: Nombre            — nombre del producto
-//   B: Precio            — precio original en MXN (número)
-//   C: Precio Mayoreo    — precio de mayoreo en MXN (número, opcional)
-//   D: Descripcion       — texto de descripción del producto
-//   E: Imagen            — URL de la imagen principal (puede ser imgbb)
-//   F: EtiquetaPrincipal — tipo de producto separados por | (ej: pez|planta)
-//   G: SubEtiqueta       — subtags separados por | (ej: Tropical|Marino)
-//   H: SubImagen1        — URL de imagen relacionada 1 (imgbb)
-//   I: SubImagen2        — URL de imagen relacionada 2 (imgbb)
-//   J: SubImagen3        — URL de imagen relacionada 3 (imgbb)
-//   K: SubImagen4        — URL de imagen relacionada 4 (imgbb)
+//   B: Precio            — precio en MXN (número)
+//   C: Descripcion       — texto de descripción del producto
+//   D: Imagen            — URL de la imagen principal (imgbb)
+//   E: EtiquetaPrincipal — tipo de producto separados por | (ej: pez|planta)
+//   F: SubEtiqueta       — subtags separados por | (ej: Tropical|Marino)
+//   G: SubImagen1        — URL de imagen relacionada 1 (imgbb)
+//   H: SubImagen2        — URL de imagen relacionada 2 (imgbb)
+//   I: SubImagen3        — URL de imagen relacionada 3 (imgbb)
+//   J: SubImagen4        — URL de imagen relacionada 4 (imgbb)
 //
 // 📷 ÁLBUM DE IMÁGENES: https://ibb.co/album/SXC5S7
 // ══════════════════════════════════════════════════════════════════════════════
@@ -232,29 +231,29 @@ function csvAProductos(filas) {
         // Saltar filas sin nombre
         if (!get(0)) continue;
 
-        // A=0 Nombre, B=1 Precio, C=2 PrecioMayoreo, D=3 Descripcion,
-        // E=4 Imagen (URL imgbb principal), F=5 EtiquetaPrincipal (separadas por |),
-        // G=6 SubEtiqueta (separadas por |),
-        // H=7 SubImagen1, I=8 SubImagen2, J=9 SubImagen3, K=10 SubImagen4
+        // A=0 Nombre, B=1 Precio, C=2 Descripcion,
+        // D=3 Imagen (URL imgbb principal), E=4 EtiquetaPrincipal (separadas por |),
+        // F=5 SubEtiqueta (separadas por |),
+        // G=6 SubImagen1, H=7 SubImagen2, I=8 SubImagen3, J=9 SubImagen4
 
-        // Columna E: URL de imagen principal desde imgbb
-        var _rawImg = get(4).replace(/^"+|"+$/g, '').trim();
+        // Columna D: URL de imagen principal desde imgbb
+        var _rawImg = get(3).replace(/^"+|"+$/g, '').trim();
         var imagenesExtra = _rawImg
             ? _rawImg.split(',').map(function(s) { return s.trim().replace(/^"+|"+$/g, ''); }).filter(Boolean)
             : [];
 
-        // Columna F: puede tener una o varias etiquetas separadas por | (ej: "pez|planta")
+        // Columna E: puede tener una o varias etiquetas separadas por | (ej: "pez|planta")
         // Se limpian comillas extra que Google Sheets agrega cuando hay validación de lista en la celda.
-        var _rawTipos = get(5).replace(/^"+|"+$/g, '').trim();
+        var _rawTipos = get(4).replace(/^"+|"+$/g, '').trim();
         var tiposArray = _rawTipos
             ? _rawTipos.split('|').map(function(s) { return s.trim().replace(/^"+|"+$/g, '').toLowerCase(); }).filter(Boolean)
             : ['producto'];
         // tipo principal = primer valor (compatibilidad con código existente)
         var tipoPrincipal = tiposArray[0] || 'producto';
 
-        // SubImagenes: columnas H–K (índices 7–10)
+        // SubImagenes: columnas G–J (índices 6–9)
         var _subImagenes = [];
-        for (var si = 7; si <= 10; si++) {
+        for (var si = 6; si <= 9; si++) {
             var rawSI = (f[si] || '').trim().replace(/^"+|"+$/g, '').trim();
             if (rawSI) _subImagenes.push(rawSI);
         }
@@ -263,14 +262,14 @@ function csvAProductos(filas) {
             id:           i,
             nombre:       get(0),
             precioNormal: parseFloat(get(1).replace(/[^0-9.]/g, '')) || 0,
-            precioBazar:  parseFloat(get(2).replace(/[^0-9.]/g, '')) || 0,
-            descripcion:  get(3),
+            precioBazar:  0,
+            descripcion:  get(2),
             imagen:       imagenesExtra[0] || '',
             imagenes:     imagenesExtra,
             forma:        '',
             tipo:         tipoPrincipal,
             tipos:        tiposArray,
-            subtags:      get(6) ? get(6).split('|').map(function(s){ return s.trim(); }).filter(Boolean).join('|') : '',
+            subtags:      get(5) ? get(5).split('|').map(function(s){ return s.trim(); }).filter(Boolean).join('|') : '',
             eventos:      '',
             etiquetas:    tiposArray,
             aditivos:     [],
@@ -406,7 +405,7 @@ function renderizarCatalogoCompleto() {
             card.appendChild(aditivosWrap);
         }
 
-        // ── Precios ──
+        // ── Precios — solo precio único ──
         var preciosBloque = document.createElement('div');
         preciosBloque.className = 'card-precios-bloque';
 
@@ -417,14 +416,6 @@ function renderizarCatalogoCompleto() {
             '<span class="card-precio-valor">$' + (p.precioNormal || '') + ' MXN</span>';
         preciosBloque.appendChild(precioNormalDiv);
 
-        if (p.precioBazar) {
-            var precioBazarDiv = document.createElement('div');
-            precioBazarDiv.className = 'card-precio-mayoreo-bloque visible';
-            precioBazarDiv.innerHTML =
-                '<span class="card-precio-mayoreo-etiqueta">Precio Bazar</span>' +
-                '<span class="card-precio-mayoreo-badge">$' + p.precioBazar + ' MXN</span>';
-            preciosBloque.appendChild(precioBazarDiv);
-        }
         card.appendChild(preciosBloque);
 
         // ── Abrir modal al hacer clic en la card ──
@@ -771,14 +762,10 @@ if (document.readyState === 'loading') {
         } else {
             precioFila.style.display = 'none';
         }
-        if (precioBazar) {
-            bazarValor.textContent = '$' + precioBazar + ' MXN';
-            bazarFila.style.display = 'block';
-        } else {
-            bazarFila.style.display = 'none';
-        }
+        // Precio Bazar eliminado — siempre oculto
+        if (bazarFila) bazarFila.style.display = 'none';
         // Mostrar/ocultar fila contenedora
-        if (filaCompleta) filaCompleta.style.display = (precioNum || precioBazar) ? 'flex' : 'none';
+        if (filaCompleta) filaCompleta.style.display = precioNum ? 'flex' : 'none';
 
         // Tags inline — SUB-ETIQUETAS (oferta/más vendido) + etiquetas de evento
         // La etiqueta PRINCIPAL se inyecta por inyectarEtiquetasModal()
