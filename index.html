@@ -179,7 +179,10 @@
 
 
     <!-- ===== BANNER PRINCIPAL ===== -->
-    <header></header>
+    <header style="position:relative;">
+        <img src="imagenes/caballito1.webp" alt="Caballito de mar"
+             style="position:absolute; bottom:0; left:0; height:85%; max-height:340px; width:auto; z-index:2; pointer-events:none; display:block;">
+    </header>
 
     <!-- ===== BANDA DE REDES SOCIALES ===== -->
     <div class="banda-redes">
@@ -227,15 +230,33 @@
                 style="font-size:4rem; font-weight:900; color:#111; letter-spacing:3px; margin:0; font-family:'Playfair Display',Georgia,serif; font-style:italic; line-height:1.1; display:block;">Acuario Equus Morelia</h1>
         </div>
 
-        <!-- Botones de navegación -->
-        <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center; padding: 0 12px; box-sizing:border-box; width:100%;">
-            <!-- Enlace directo a Google Maps -->
+        <!-- Recuadro Google Maps -->
+        <div style="width:100%; max-width:480px; margin:0 auto;">
             <a href="https://www.google.com/maps/search/Astronomos+180,+Colonia+Cosmos,+Morelia,+Mexico+58050"
                target="_blank"
-               style="display:inline-flex; align-items:center; gap:10px; background:#5c4d43; color:white; text-decoration:none; border-radius:999px; padding:14px 24px; font-size:1.1rem; font-weight:700; font-family:inherit; box-shadow:0 4px 18px rgba(92,77,67,0.3); transition:all 0.25s; cursor:pointer; border:none; justify-content:center; flex:1; min-width:140px; max-width:300px;">
-                <span style="width:40px; height:40px; border-radius:50%; overflow:hidden; flex-shrink:0; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; font-size:1.4rem;">📍</span>
-                <span style="font-family:'Cormorant Garamond', Georgia, serif; font-style:italic; letter-spacing:1px;">Nuestra Ubicación</span>
-            </a></div>
+               style="display:block; text-decoration:none; border-radius:18px; overflow:hidden; box-shadow:0 6px 24px rgba(0,0,0,0.13); border:2.5px solid #d4c5b8; transition:box-shadow 0.25s, border-color 0.25s;"
+               onmouseover="this.style.boxShadow='0 10px 32px rgba(0,0,0,0.2)'; this.style.borderColor='#8c7565';"
+               onmouseout="this.style.boxShadow='0 6px 24px rgba(0,0,0,0.13)'; this.style.borderColor='#d4c5b8';">
+                <!-- Mapa embebido (pointer-events:none para que el clic pase al <a>) -->
+                <div style="width:100%; height:200px; position:relative; overflow:hidden;">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Astronomos+180,+Colonia+Cosmos,+Morelia,+Michoacan+58050&output=embed&z=16"
+                        width="100%" height="100%"
+                        style="border:none; display:block; pointer-events:none;"
+                        loading="lazy"
+                        title="Ubicación Acuario Equus Morelia">
+                    </iframe>
+                </div>
+                <!-- Pie del recuadro -->
+                <div style="background:#fff; padding:14px 18px; display:flex; align-items:center; gap:12px; border-top:1px solid #eee;">
+                    <span style="font-size:1.6rem; flex-shrink:0;">📍</span>
+                    <div style="text-align:left;">
+                        <p style="margin:0 0 2px; font-size:0.95rem; font-weight:800; color:#362a22; font-family:inherit;">Visítanos en nuestro local</p>
+                        <p style="margin:0; font-size:0.78rem; color:#8c7565; font-weight:500;">Astrónomos 180, Col. Cosmos, Morelia · Toca para abrir en Maps →</p>
+                    </div>
+                </div>
+            </a>
+        </div>
         
     </div>
 
