@@ -3337,3 +3337,39 @@ body.modo-oscuro .zona-titulo-pagina span {
 body.modo-oscuro #tituloVelasKukumita { color: #f0e8e0 !important; }
 body.modo-oscuro .zona-titulo-pagina h1,
 body.modo-oscuro .zona-titulo-pagina h2 { color: #e0d5cc !important; }
+
+/* ════════════════════════════════════════════════════
+   BOTONES MODO CATÁLOGO — beige permanente, texto blanco
+   ════════════════════════════════════════════════════ */
+.btn-modo-velas {
+    background-color: #c9a98a !important;
+    border-color: #b8967a !important;
+    color: #fff !important;
+}
+.btn-modo-velas.activo {
+    background-color: #6b4f3a !important;
+    border-color: #5c3e2c !important;
+    color: #fff !important;
+}
+.btn-modo-velas:hover:not(.activo) {
+    background-color: #b8967a !important;
+    border-color: #a0825e !important;
+    color: #fff !important;
+}
+
+/* ════════════════════════════════════════════════════
+   MODO OSCURO — textos de la sección Acerca de Nosotros
+   ════════════════════════════════════════════════════ */
+body.modo-oscuro #panelPillBiografia .pill-panel-inner p,
+body.modo-oscuro #panelPillBiografia .pill-panel-inner span,
+body.modo-oscuro #panelPillBiografia .pill-panel-inner li,
+body.modo-oscuro #panelPillBiografia .pill-panel-inner div {
+    color: #f0ece8 !important;
+}
+body.modo-oscuro #panelPillBiografia .pill-panel-inner h2,
+body.modo-oscuro #panelPillBiografia .pill-panel-inner h3 {
+    color: #fff !important;
+}
+body.modo-oscuro #panelPillBiografia .pill-panel-inner strong {
+    color: #7dd4f5 !important;
+}
